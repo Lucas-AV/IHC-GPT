@@ -1,7 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // LeftSide Colors
@@ -92,8 +91,8 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: 768,
               decoration: BoxDecoration(
-                  color: messageBoxInputColor,
-                  borderRadius: BorderRadius.circular(3)
+                color: messageBoxInputColor,
+                borderRadius: BorderRadius.circular(3)
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16),
@@ -141,7 +140,10 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 width: 768,
                 height: 20,
-                child: Center(child: Text("IHC ChatGPT Version 1.0.0 - Alpha without API integration",style: TextStyle(color: Colors.white38),)),
+                child: Center(child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: FittedBox(child: Text("IHC ChatGPT Version 1.0.0 - Alpha without API integration",style: TextStyle(color: Colors.white38),)),
+                )),
               ),
             )
           ],
@@ -167,6 +169,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> leftSideTemplate = [];
   List<String> leftSideTextTemplate = [];
   List<Widget> chats = [];
+
   @override
   void initState(){
     super.initState();
@@ -178,7 +181,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     leftSideTemplate = [
       const SizedBox(
         height: 4,
@@ -261,8 +263,158 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: Row(
           children: [
-            leftMenu(),
-            chats[currentIndex],
+            if(MediaQuery.of(context).size.width > 605)
+              leftMenu(),
+
+            Expanded(
+              child: Container(
+                color: rightSideContainerColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 60,
+                                  width: 240,
+                                  child: Column(
+                                    children: const [
+                                      Icon(Icons.light_mode_outlined,color: Colors.white,size: 24),
+                                      SizedBox(height: 5),
+                                      Text("Examples",style: TextStyle(color: Colors.white,fontSize: 16)),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  child: SizedBox(
+                                    height: 60,
+                                    width: 240,
+                                    child: Column(
+                                      children: const [
+                                        Icon(MdiIcons.flashOutline,color: Colors.white,size: 24),
+                                        SizedBox(height: 5),
+                                        Text("Capabilities",style: TextStyle(color: Colors.white,fontSize: 16)),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  width: 240,
+                                  child: Column(
+                                    children: const [
+                                      Icon(Icons.warning_amber_outlined,color: Colors.white,size: 24),
+                                      SizedBox(height: 5),
+                                      Text("Limitations",style: TextStyle(color: Colors.white,fontSize: 16)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            for(int i = 0; i < 3; i++)
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: i == 1? 20:0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    for(int j = 0; j < 3; j++)
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: j == 1? 20:0),
+                                        child: Container(
+                                          height: 80,
+                                          width: 240,
+                                          decoration: BoxDecoration(
+                                            color: secondaryFloatingButtonColor,
+                                            borderRadius: BorderRadius.circular(3)
+                                          ),
+                                          child: const Center(child: Text(textAlign: TextAlign.center,"Example text of this button\nSecond Line Example",style: TextStyle(color: Colors.white))),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 768,
+                            decoration: BoxDecoration(
+                                color: messageBoxInputColor,
+                                borderRadius: BorderRadius.circular(3)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(bottom: 2),
+                                      child: TextField(
+                                        maxLines: null,
+                                        decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: "Send a message...",
+                                            hintStyle: TextStyle(color: Colors.white38)
+                                        ),
+                                        onChanged: (e){
+                                          setState(() {
+                                            msg = textEditingController.text;
+                                          });
+                                        },
+                                        controller: textEditingController,
+                                        cursorColor: Colors.white,
+                                        cursorWidth: 2,
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                                    child: Transform.rotate(
+                                        angle: -7,
+                                        child: const Icon(MdiIcons.send,color: Colors.white70)
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 4,bottom: 28),
+                            child: SizedBox(
+                              width: 768,
+                              height: 20,
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 24),
+                                  child: FittedBox(child: Text("IHC ChatGPT Version 1.0.0 - Alpha without API integration",style: TextStyle(color: Colors.white38),)),
+                                )
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
