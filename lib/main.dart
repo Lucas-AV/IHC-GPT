@@ -273,75 +273,117 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Expanded(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 60,
-                                  width: 240,
-                                  child: Column(
-                                    children: const [
-                                      Icon(Icons.light_mode_outlined,color: Colors.white,size: 24),
-                                      SizedBox(height: 5),
-                                      Text("Examples",style: TextStyle(color: Colors.white,fontSize: 16)),
-                                    ],
-                                  ),
-                                ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              for(int i = 0; i < 3; i++)
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                                  child: SizedBox(
-                                    height: 60,
-                                    width: 240,
-                                    child: Column(
-                                      children: const [
-                                        Icon(MdiIcons.flashOutline,color: Colors.white,size: 24),
-                                        SizedBox(height: 5),
-                                        Text("Capabilities",style: TextStyle(color: Colors.white,fontSize: 16)),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                  width: 240,
+                                  padding: EdgeInsets.symmetric(horizontal: i == 1? 20:0),
                                   child: Column(
-                                    children: const [
-                                      Icon(Icons.warning_amber_outlined,color: Colors.white,size: 24),
-                                      SizedBox(height: 5),
-                                      Text("Limitations",style: TextStyle(color: Colors.white,fontSize: 16)),
+                                    children: [
+                                      Icon([Icons.light_mode_outlined,MdiIcons.flashOutline,Icons.warning_amber_outlined][i],color: Colors.white,size: 24),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 5,bottom: 15),
+                                        child: Text(["Examples","Capabilities","Limitations"][i],style: const TextStyle(color: Colors.white,fontSize: 16)),
+                                      ),
+                                      for(int j = 0; j < 3; j++)
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(vertical: j == 1? 20:0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: secondaryFloatingButtonColor,
+                                              borderRadius: BorderRadius.circular(3)
+                                            ),
+                                            child: RawMaterialButton(
+                                              onPressed: (){},
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                                                child: Center(
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      "Example text of this button\nSecond Line Example",
+                                                      style: TextStyle(color: Colors.white),
+                                                      textAlign: TextAlign.center,
+                                                    )
+                                                  )
+                                                ),
+                                              )
+                                            ),
+                                          ),
+                                        ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            for(int i = 0; i < 3; i++)
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: i == 1? 20:0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    for(int j = 0; j < 3; j++)
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: j == 1? 20:0),
-                                        child: Container(
-                                          height: 80,
-                                          width: 240,
-                                          decoration: BoxDecoration(
-                                            color: secondaryFloatingButtonColor,
-                                            borderRadius: BorderRadius.circular(3)
-                                          ),
-                                          child: const Center(child: Text(textAlign: TextAlign.center,"Example text of this button\nSecond Line Example",style: TextStyle(color: Colors.white))),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                          ],
-                        ),
+                                )
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     SizedBox(
+                              //       height: 60,
+                              //       width: 240,
+                              //       child: Column(
+                              //         children: const [
+                              //           Icon(Icons.light_mode_outlined,color: Colors.white,size: 24),
+                              //           SizedBox(height: 5),
+                              //           Text("Examples",style: TextStyle(color: Colors.white,fontSize: 16)),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //     Padding(
+                              //       padding: const EdgeInsets.symmetric(horizontal: 20),
+                              //       child: SizedBox(
+                              //         height: 60,
+                              //         width: 240,
+                              //         child: Column(
+                              //           children: const [
+                              //             Icon(MdiIcons.flashOutline,color: Colors.white,size: 24),
+                              //             SizedBox(height: 5),
+                              //             Text("Capabilities",style: TextStyle(color: Colors.white,fontSize: 16)),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       height: 60,
+                              //       width: 240,
+                              //       child: Column(
+                              //         children: const [
+                              //           Icon(Icons.warning_amber_outlined,color: Colors.white,size: 24),
+                              //           SizedBox(height: 5),
+                              //           Text("Limitations",style: TextStyle(color: Colors.white,fontSize: 16)),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // for(int i = 0; i < 3; i++)
+                              //   Padding(
+                              //     padding: EdgeInsets.symmetric(vertical: i == 1? 20:0),
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.center,
+                              //       children: [
+                              //         for(int j = 0; j < 3; j++)
+                              //           Padding(
+                              //             padding: EdgeInsets.symmetric(horizontal: j == 1? 20:0),
+                              //             child: Container(
+                              //               height: 80,
+                              //               width: 240,
+                              //               decoration: BoxDecoration(
+                              //                 color: secondaryFloatingButtonColor,
+                              //                 borderRadius: BorderRadius.circular(3)
+                              //               ),
+                              //               child: const Center(child: FittedBox(child: Text(textAlign: TextAlign.center,"Example text of this button\nSecond Line Example",style: TextStyle(color: Colors.white)))),
+                              //             ),
+                              //           ),
+                              //       ],
+                              //     ),
+                              //   ),
+                            ],
+                          ),
+                        ],
                       )
                     ),
                     Padding(
