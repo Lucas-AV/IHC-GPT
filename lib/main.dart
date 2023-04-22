@@ -1,18 +1,8 @@
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'globals.dart';
 import 'dart:math';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-// LeftSide Colors
-Color leftSideBarColor = const Color.fromRGBO(32,33,35,1);
-Color leftSideBarHistoryItemHoverColor = const Color.fromRGBO(42,43,50,1);
-
-// RightSide Colors
-Color rightSideContainerColor = const Color.fromRGBO(52,53,65,1);
-Color messageBoxInputColor = const Color.fromRGBO(64,65,79,1);
-Color secondaryFloatingButtonColor = const Color.fromRGBO(62,63,75,1);
-Color secondaryFloatingButtonHoverColor = const Color.fromRGBO(32,33,35,1);
-
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +20,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -39,47 +30,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-
-  Widget leftSideButton({String title = "New chat", IconData leading = Icons.add,bool isNewChatButton = false, double verticalPadding = 8, int index = 0}){
-    BoxDecoration newChatBoxDecoration = BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(width: 0.5,color: Colors.white54)
-    );
-
-    BoxDecoration chatHistoryBoxDecoration = BoxDecoration(
-      color: currentIndex == index && leading == Icons.chat_bubble_outline? leftSideBarHistoryItemHoverColor : Colors.transparent,
-    );
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: verticalPadding),
-      child: Container(
-        width: 250,
-        height: 47,
-        decoration: isNewChatButton? newChatBoxDecoration : chatHistoryBoxDecoration,
-        child: RawMaterialButton(
-            onPressed: (){
-              if(isNewChatButton){
-
-              } else {
-                setState(() {
-                  currentIndex = index;
-                });
-              }
-            },
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(leading,color: Colors.white,size: 16,),
-                ),
-                Expanded(child: Text(title,style: const TextStyle(color: Colors.white,overflow: TextOverflow.ellipsis),maxLines: 1))
-              ],
-            )
-        ),
-      ),
-    );
-  }
 
   Widget rightSide({int index = 0}){
     return Expanded(
@@ -186,11 +136,13 @@ class _HomePageState extends State<HomePage> {
         height: 4,
       ),
       for(int i = 0; i < 20; i++)
-        leftSideButton(
+        LeftSideButton(
           title: leftSideTextTemplate[i],
           leading: Icons.chat_bubble_outline,
           verticalPadding: 0.9,
-          index: i
+          index: i,
+          currentIndex: 0,
+          isNewChatButton: false,
         ),
     ];
 
@@ -205,7 +157,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: leftSideButton(isNewChatButton: true,verticalPadding: 0),
+                child: LeftSideButton(
+                  isNewChatButton: true,
+                  verticalPadding: 0,
+                  currentIndex: currentIndex,
+                  index: 0,
+                  leading: Icons.add,
+                  title: "New Chat",
+                ),
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -224,30 +183,48 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 4,
                     ),
-                    leftSideButton(
-                        title: "Clear conversations",
-                        leading: Icons.delete_outline,
-                        verticalPadding: 0
+                    LeftSideButton(
+                      title: "Clear conversations",
+                      leading: Icons.delete_outline,
+                      verticalPadding: 0,
+                      currentIndex: currentIndex,
+                      index: 0,
+                      isNewChatButton: false,
                     ),
-                    leftSideButton(
-                        title: "Upgrade to Plus",
-                        leading: Icons.person_outline,
-                        verticalPadding: 0
+                    LeftSideButton(
+                      title: "Upgrade to Plus",
+                      leading: Icons.person_outline,
+                      verticalPadding: 0,
+                      currentIndex: currentIndex,
+                      index: 0,
+                      isNewChatButton: false,
                     ),
-                    leftSideButton(
+                    LeftSideButton(
                         title: "Light Mode",
                         leading: Icons.light_mode_outlined,
-                        verticalPadding: 0
+                        verticalPadding: 0,
+                      currentIndex: currentIndex,
+                      index: 0,
+                      isNewChatButton: false,
+
                     ),
-                    leftSideButton(
+                    LeftSideButton(
                         title: "Get Help",
                         leading: MdiIcons.exportVariant,
-                        verticalPadding: 0
+                        verticalPadding: 0,
+                      currentIndex: currentIndex,
+                      index: 0,
+                      isNewChatButton: false,
+
                     ),
-                    leftSideButton(
+                    LeftSideButton(
                       title: "Log out",
                       leading: Icons.exit_to_app,
                       verticalPadding: 4,
+                      currentIndex: currentIndex,
+                      index: 0,
+                      isNewChatButton: false,
+
                     ),
 
                   ],
